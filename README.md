@@ -1,2 +1,4 @@
-# The Effect of Nonverbal Information in Central Bank A Multimodal Big Data Perspective Communication
-This repository hosts code for my summer SURF program. It implements the full data‑processing pipeline for the multimodal research on central bank non‑verbal information in communication, allowing readers to understand the workflow and replicate the empirical analysis.
+Central Bank Communication & Financial Data Analysis: A Reproducible Beginner Project
+This is an independent review and reanalysis of my 2026 summer SURF project on nonverbal information in central bank communication. This repository focuses on the data-processing pipeline, variable construction, empirical analysis, and potential improvements to the original research design. It also serves as a practical learning example for applying methods such as linear regression to financial data, with an emphasis on understanding why each step is performed rather than simply reproducing the code.
+
+本仓库是对我在 2026 年暑期参与的 SURF 项目的独立复盘与再分析。项目主要围绕央行发布会中的非语言信息与短期金融市场反应展开。本仓库将重点拆解原研究中的数据处理、变量构造与实证分析流程，并记录我对其中方法、研究设计及潜在改进方向的理解与思考。同时，本仓库也希望为对央行非语言信息、金融数据分析感兴趣的学习者提供一个简单的实践案例，并以实际数据为基础介绍线性回归等基础数据分析方法。对于第一次接触相关方法的学习者，我会尽可能解释每一步“为什么这样做”，而不仅仅展示最终代码和结果。
