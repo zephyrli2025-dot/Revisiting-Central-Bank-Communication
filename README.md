@@ -19,6 +19,8 @@
    * [2.2 情绪概念定义与标准化](#22-情绪概念定义与标准化)
    * [2.3 未来收益函数](#23-未来收益函数)
    * [2.4 线性回归分析](#24-线性回归分析)
+3. [Limitations](#3-limitations)
+4. [后续分析](#4-后续分析)
 
 ---
 
@@ -103,7 +105,9 @@
 原研究中的 Facet 定义为：
 
 $$
-Facet=\frac{NegFace-PosFace}{PosFace+NegFace}
+Facet =
+\frac{NegFace - PosFace}
+{PosFace + NegFace}
 $$
 
 由于我的数据有限，同时由于情绪表达较少，有大量一分钟内只有一种情绪的情况。
@@ -111,13 +115,13 @@ $$
 如果直接采用原研究的方法，将会出现大量：
 
 $$
-Facet=1
+Facet = 1
 $$
 
 或：
 
 $$
-Facet=-1
+Facet = -1
 $$
 
 的情况。
@@ -125,9 +129,9 @@ $$
 为了降低这种离散化现象，我将中立帧也加入了考量，并采用以下形式：
 
 $$
-Facet=
-\frac{PosFace-NegFace}
-{PosFace+NegFace+NeuFace}
+Facet =
+\frac{PosFace - NegFace}
+{PosFace + NegFace + NeuFace}
 $$
 
 其中：
@@ -139,12 +143,12 @@ $$
 从该表达式可以看出：
 
 $$
--1\leq Facet\leq1
+-1 \leq Facet \leq 1
 $$
 
 Facet 越接近 $1$，表示该分钟的情绪越偏向正面；越接近 $-1$，则表示情绪越偏向负面。
 
-> **Methodological note:** 将中立情绪加入分母并不意味着这种定义一定优于原始定义，而是针对本次复盘数据中大量 $Facet=\pm1$ 的情况所进行的一种 alternative specification。
+> **Methodological note:** 将中立情绪加入分母并不意味着这种定义一定优于原始定义，而是针对本次复盘数据中大量 $Facet = \pm 1$ 的情况所进行的一种 alternative specification。
 
 ---
 
@@ -189,7 +193,8 @@ $$
 标准化公式为：
 
 $$
-Z=\frac{X-\bar{X}}{s}
+Z =
+\frac{X - \bar{X}}{s}
 $$
 
 其中：
@@ -206,10 +211,10 @@ $$
 
 因此：
 
-* $Z=0$：处于平均水平
-* $Z=1$：高于平均水平一个标准差
-* $Z=-1$：低于平均水平一个标准差
-* $Z=2$：高于平均水平两个标准差
+* $Z = 0$：处于平均水平
+* $Z = 1$：高于平均水平一个标准差
+* $Z = -1$：低于平均水平一个标准差
+* $Z = 2$：高于平均水平两个标准差
 
 ---
 
@@ -220,7 +225,7 @@ $$
 它本质上只是改变了度量单位，就像：
 
 $$
-1\text{ m}=100\text{ cm}
+1\text{ m} = 100\text{ cm}
 $$
 
 描述的是同一个长度。
@@ -228,61 +233,81 @@ $$
 假设原来的线性回归模型为：
 
 $$
-Y=\alpha+\beta X+\epsilon
+Y = \alpha + \beta X + \epsilon
 $$
 
 将标准化公式：
 
 $$
-Z=\frac{X-\bar{X}}{s}
+Z = \frac{X-\bar{X}}{s}
 $$
 
-代入回归模型：
+代入标准化后的回归模型：
 
 $$
-Y=\alpha^*+\beta^*
-\frac{X-\bar{X}}{s}+\epsilon
+Y = \alpha^* + \beta^* Z + \epsilon
+$$
+
+得到：
+
+$$
+Y =
+\alpha^*
++
+\beta^*
+\frac{X-\bar{X}}{s}
++
+\epsilon
 $$
 
 展开：
 
 $$
-Y=
+Y =
 \alpha^*
-+\frac{\beta^*}{s}X
--\frac{\beta^*\bar{X}}{s}
-+\epsilon
++
+\frac{\beta^*}{s}X
+-
+\frac{\beta^*\bar{X}}{s}
++
+\epsilon
 $$
 
 整理：
 
 $$
-Y=
+Y =
 \left(
-\alpha^*-\frac{\beta^*\bar{X}}{s}
+\alpha^*
+-
+\frac{\beta^*\bar{X}}{s}
 \right)
 +
 \frac{\beta^*}{s}X
-+\epsilon
++
+\epsilon
 $$
 
 可以看到，最终仍然可以写成：
 
 $$
-Y=\alpha+\beta X+\epsilon
+Y = \alpha + \beta X + \epsilon
 $$
 
 其中：
 
 $$
-\alpha=
-\alpha^*-\frac{\beta^*\bar{X}}{s}
+\alpha =
+\alpha^*
+-
+\frac{\beta^*\bar{X}}{s}
 $$
 
 以及：
 
 $$
-\beta=\frac{\beta^*}{s}
+\beta =
+\frac{\beta^*}{s}
 $$
 
 因此，标准化主要改变的是**系数的表达方式和单位**。
@@ -310,8 +335,12 @@ $$
 以五分钟收益为例：
 
 $$
-R_{t,t+5}=
-\ln\left(\frac{P_{t+5}}{P_t}\right)
+R_{t,t+5}
+=
+\ln
+\left(
+\frac{P_{t+5}}{P_t}
+\right)
 $$
 
 其中：
@@ -324,7 +353,7 @@ $$
 首先，我们不能简单地使用股票价格差：
 
 $$
-P_{t+5}-P_t
+P_{t+5} - P_t
 $$
 
 来评估收益。
@@ -334,7 +363,7 @@ $$
 例如：
 
 $$
-1\rightarrow2
+1 \rightarrow 2
 $$
 
 价格上涨 $1$ 元，但收益率实际上为：
@@ -346,7 +375,7 @@ $$
 而如果：
 
 $$
-100\rightarrow101
+100 \rightarrow 101
 $$
 
 同样上涨 $1$ 元，但收益率只有：
@@ -372,11 +401,20 @@ $$
 对数收益率则具有：
 
 $$
-\ln\left(\frac{P_2}{P_1}\right)
+\ln
+\left(
+\frac{P_2}{P_1}
+\right)
 +
-\ln\left(\frac{P_3}{P_2}\right)
+\ln
+\left(
+\frac{P_3}{P_2}
+\right)
 =
-\ln\left(\frac{P_3}{P_1}\right)
+\ln
+\left(
+\frac{P_3}{P_1}
+\right)
 $$
 
 因此，多个连续时间区间的对数收益可以直接相加。
@@ -394,7 +432,11 @@ $$
 $$
 R_{t,t+h}
 =
-\alpha+\beta E_t+\epsilon_t
+\alpha
++
+\beta E_t
++
+\epsilon_t
 $$
 
 其中：
@@ -428,13 +470,13 @@ $$
 当：
 
 $$
-E_t=0
+E_t = 0
 $$
 
 时，模型的预测收益为：
 
 $$
-\hat R_{t,t+h}=\alpha
+\hat{R}_{t,t+h} = \alpha
 $$
 
 因此，$\alpha$ 可以理解为：
@@ -452,22 +494,12 @@ $$
 $$
 \epsilon_t
 =
-R_{\text{real}}
+R_{t,t+h}
 -
-(\alpha+\beta E_t)
+\hat{R}_{t,t+h}
 $$
 
 因此：
-
-$$
-\epsilon_t
-=
-R_{t,t+h}
--
-\hat R_{t,t+h}
-$$
-
-也就是说：
 
 * $\alpha$：模型中的固定截距
 * $\epsilon_t$：每一个观测值自己的误差项
