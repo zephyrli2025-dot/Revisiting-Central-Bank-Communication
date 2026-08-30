@@ -237,12 +237,6 @@ $$
 Y = \alpha^* + \beta^* \frac{X - \bar{X}}{s} + \epsilon
 $$
 
-展开：
-
-$$
-Y = \alpha^* + \frac{\beta^*}{s}X - \frac{\beta^* \bar{X}}{s} + \epsilon
-$$
-
 整理：
 
 $$
